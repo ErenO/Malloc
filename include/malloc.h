@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:10:28 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/07 19:04:31 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/08 14:26:43 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@
 
 typedef struct s_metadata t_metadata;
 typedef struct s_data t_data;
-void *p;
-t_metadata *meta;
 
+typedef	struct	s_p
+{
+  int size;
+  t_metadata *meta;
+  t_metadata *large;
+}				t_p;
+
+t_p *p;
 typedef struct  s_metadata
 {
   size_t		size;
