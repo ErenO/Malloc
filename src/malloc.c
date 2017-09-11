@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:24 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 16:00:28 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 16:06:33 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,33 +170,33 @@ void *last_add(t_metadata *meta)
 void *malloc(size_t size)
 {
     printf("BIENVENUE");
-  if (p == NULL)
-  {
+    if (p == NULL)
+    {
     p =  mmap(0, sizeof(t_p), PROT_READ | PROT_WRITE,
         MAP_ANON | MAP_PRIVATE, -1, 0);
     p->size = 0;
-  }
-  // printf("taille %zu\n", size);
-  if (size < TINY)
-  {
+    }
+    // printf("taille %zu\n", size);
+    if (size < TINY)
+    {
     // printf("TINY\n");
     p->meta = meta_insert(p->meta, TINY);
     p->size += TINY;
     return (last_add(p->meta));
-  }
-  else if (size < SMALL)
-  {
+    }
+    else if (size < SMALL)
+    {
     // printf("SMALL\n");
     p->meta = meta_insert(p->meta, SMALL);
     p->size += SMALL;
     return (last_add(p->meta));
-  }
-  else
-  {
+    }
+    else
+    {
     // printf("LARGE\n");
     p->large = large_insert(p->large, size);
     return (last_add(p->large));
-  }
-  // printf("NULL\n");
-  return (NULL);
+    }
+    // printf("NULL\n");
+    return (NULL);
 }
