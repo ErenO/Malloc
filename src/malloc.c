@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:24 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 15:04:30 by eren_ozdek       ###   ########.fr       */
+/*   Updated: 2017/09/11 16:00:28 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void *last_add(t_metadata *meta)
 
 void *malloc(size_t size)
 {
+    printf("BIENVENUE");
   if (p == NULL)
   {
     p =  mmap(0, sizeof(t_p), PROT_READ | PROT_WRITE,
