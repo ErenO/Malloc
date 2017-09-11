@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:10:28 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 00:53:48 by eren_ozdek       ###   ########.fr       */
+/*   Updated: 2017/09/11 16:39:15 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct  s_data
   void *ptr;
 }               t_data;
 
+void print_list();
 int		ft_list_size(t_metadata *begin_list);
 void show_alloc_mem();
 void free(void *ptr);

@@ -6,21 +6,17 @@
 #    By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 16:11:28 by eozdek            #+#    #+#              #
-#    Updated: 2017/09/11 16:00:59 by eozdek           ###   ########.fr        #
+#    Updated: 2017/09/11 17:00:15 by eozdek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifeq ($(HOSTTYPE),)
-	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
-endif
-
-NAME	= libft_malloc_$(HOSTTYPE).so
+NAME	= malloc
 FILES	= get_next_line.c main.c show_alloc_mem.c malloc.c free.c realloc.c
 SRCS	= $(addprefix src/, $(FILES))
 OBJS	= $(SRCS:src/%.c=.obj/%.o)
 INC		= -I include -I libft/includes
 FLAGS	= -Wall -Wextra -Werror
-LIB		= -L libft -lft
+LIB		= -L ./libft -lft
 CC		= gcc
 
 all: $(NAME)
@@ -29,9 +25,7 @@ $(NAME): $(OBJS)
 	@echo "\033[96m                  by e🏀 zdek\033[97m         "
 	@echo "\033[91mCompiling 😇\033[97m"
 		@make -C libft
-		#@$(CC) $(FLAGS) $(SRCS) -o $(NAME) $(INC) $(LIB)
-		@$(CC) -shared -o $(NAME) $(OBJS) $(LIB)
-		@ln -s $(NAME) libft_malloc.so
+		@$(CC) $(FLAGS) $(SRCS) -o $(NAME) $(INC) $(LIB)
 		@echo "\033[90mDone 😎\033[97m"
 .obj/%.o: src/%.c
 	mkdir -p .obj

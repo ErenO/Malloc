@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:53 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 13:53:16 by eren_ozdek       ###   ########.fr       */
+/*   Updated: 2017/09/11 17:49:50 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void *ptr_in_list(t_metadata *list, void *addr)
   {
     ptr = list->ptr - list->size;
     // printf("a %zu\n", list->size);
-    // printf("addr %p\nptr %p\n", addr, ptr);
+    printf("addr %p\nptr %p\n", addr, ptr);
     if (ptr == addr)
     {
-        // printf("hello %d\n", list->free);
+        printf("hello %p\n", addr);
         list->free = 1;
         return (list->ptr);
     }
@@ -47,11 +47,16 @@ void  free(void *ptr)
 
     i = 0;
     to_free = NULL;
-    // printf("FREE");
+    printf("FREE\n");
     // printf("%d\n", ft_list_size(p->large));
     if ((to_free = ptr_in_list(p->large, ptr)) != NULL)
     {
+        printf("non nulle\n");
         // printf("IN LARGE");
+    }
+    else
+    {
+        printf("NULLLLLLLLLLLL %p\n", ptr);
     }
     // printf("Meta");
     if (ptr_in_list(p->meta, ptr) != NULL)

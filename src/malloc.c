@@ -6,11 +6,36 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:24 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 16:06:33 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 16:39:29 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
+
+void print_list()
+{
+    t_metadata *tmp;
+    t_metadata *tlp;
+
+    tmp = p->meta;
+    tlp = p->large;
+    if (tmp != NULL)
+    {
+        while (tmp->next != NULL)
+        {
+            printf("free %d\naddr %p\nsize %zu\n", tmp->free, tmp->ptr, tmp->size);
+            tmp = tmp->next;
+        }
+    }
+    if (tlp != NULL)
+    {
+        while (tlp->next != NULL)
+        {
+            printf("free %d\naddr %p\nsize %zu\n", tlp->free, tlp->ptr, tlp->size);
+            tlp = tlp->next;
+        }
+    }
+}
 
 int check_enough_space_memory(size_t size)
 {

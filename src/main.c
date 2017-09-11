@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:10:19 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 15:13:15 by eren_ozdek       ###   ########.fr       */
+/*   Updated: 2017/09/11 17:52:23 by eozdek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main()
   int i;
   int nb;
   char c;
+
 
   i = 0;
   nb = 42;
@@ -136,10 +137,29 @@ int main()
   //     s = malloc(nb);
   //     i++;
   // }
+
   printf("MAIN %d\n", p->size);
   printf("large %d\n", ft_list_size(p->large));
   printf("meta %d\n", ft_list_size(p->meta));
   printf("lsit %p\n", p->meta->ptr);
+  printf("AVANT\n");
+  s = realloc(s, 60);
+  print_list();
+  printf("\n\n\n\n");
   free(s);
+  free(str1);
+  print_list();
+  print_list();
+  //
+  // free(s);
+  // free(str);
+  // free(str1);
+  // free(str2);
+  // free(sstr3);
+  // free(str4);
+  // free(str5);
+  // free(str6);
+  // printf("APRES\n");
+  // print_list();
   return (0);
 }
