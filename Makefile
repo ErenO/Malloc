@@ -6,12 +6,12 @@
 #    By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/27 16:11:28 by eozdek            #+#    #+#              #
-#    Updated: 2017/09/08 16:08:19 by eozdek           ###   ########.fr        #
+#    Updated: 2017/09/11 00:54:00 by eren_ozdek       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= malloc
-FILES	= get_next_line.c main.c show_alloc_mem.c malloc.c free.c
+FILES	= get_next_line.c main.c show_alloc_mem.c malloc.c free.c realloc.c
 SRCS	= $(addprefix src/, $(FILES))
 OBJS	= $(SRCS:src/%.c=.obj/%.o)
 INC		= -I include -I libft/includes

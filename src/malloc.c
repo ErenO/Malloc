@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:24 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/08 15:53:27 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/09 00:16:52 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,35 +85,36 @@ t_metadata *meta_insert(t_metadata *meta, size_t size)
 
 t_metadata *large_insert(t_metadata *large, size_t size)
 {
-  t_metadata *tmp;
-  t_metadata *tmp2;
-  void *ptr;
+    t_metadata *tmp;
+    t_metadata *tmp2;
+    void *ptr;
 
-  //check d'erreur à faire
-  ptr = mmap(0, size, PROT_READ | PROT_WRITE,
+    //check d'erreur à faire
+    ptr = mmap(0, size, PROT_READ | PROT_WRITE,
                 MAP_ANON | MAP_PRIVATE, -1, 0);
-  tmp = mmap(0, sizeof(t_metadata), PROT_READ | PROT_WRITE,
+    tmp = mmap(0, sizeof(t_metadata), PROT_READ | PROT_WRITE,
       MAP_ANON | MAP_PRIVATE, -1, 0);
-  tmp->size = size;
-  tmp->next = NULL;
-  tmp->free = 0;
-  tmp2 = large;
-  if (large == NULL)
-  {
+
+    tmp->size = size;
+    tmp->next = NULL;
+    tmp->free = 0;
+    tmp2 = large;
+    if (large == NULL)
+    {
 
     tmp->ptr = ptr;
     tmp->prev = NULL;
     return (tmp);
-  }
-  else
-  {
+    }
+    else
+    {
     tmp->ptr = tmp2->ptr;
     while (tmp2->next != NULL)
       tmp2 = tmp2->next;
     tmp2->next = tmp;
     tmp->prev = tmp2;
-  }
-  return (large);
+    }
+    return (large);
 }
 
 int		ft_list_size(t_metadata *begin_list)
@@ -140,8 +141,8 @@ void *last_add(t_metadata *meta)
 {
   while (meta->next != NULL)
     meta = meta->next;
-  // printf("%p\n", meta->ptr);
-  return (meta->ptr);
+  printf("%p\n", meta->ptr);
+  return (meta->ptr - meta->size);
 }
 
 void *malloc(size_t size)

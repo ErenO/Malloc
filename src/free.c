@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:53 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/08 16:17:58 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 00:43:53 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,23 @@ void *ptr_in_list(t_metadata *list, void *addr)
   void *ptr;
 
   // ptr = NULL;
-  printf("b\n");
   if (list == NULL)
-  {
     return (NULL);
-  }
   if (list->prev != NULL)
   {
     while (list->prev != NULL)
-    {
       list = list->prev;
-    }
   }
-  printf("c");
-  while (list->next != NULL)
+  while (list != NULL)
   {
-    printf("a");
     ptr = list->ptr - list->size;
+    printf("a %zu\n", list->size);
+    printf("addr %p\nptr %p\n", addr, ptr);
     if (ptr == addr)
     {
-      return (addr);
+        printf("hello %d\n", list->free);
+        list->free = 1;
+        return (list->ptr);
     }
     list = list->next;
   }
@@ -45,15 +42,20 @@ void *ptr_in_list(t_metadata *list, void *addr)
 
 void  free(void *ptr)
 {
-  printf("FREE");
-  (void)ptr;
-  printf("%d\n", ft_list_size(p->large));
-  if (ptr_in_list(p->large, ptr) != NULL)
-  {
-    printf("IN LARGE");
-  }
-  if (ptr_in_list(p->meta, ptr) != NULL)
-  {
-    printf("IN META");
-  }
+    int i;
+    void *to_free;
+
+    i = 0;
+    to_free = NULL;
+    printf("FREE");
+    printf("%d\n", ft_list_size(p->large));
+    if ((to_free = ptr_in_list(p->large, ptr)) != NULL)
+    {
+        printf("IN LARGE");
+    }
+    printf("Meta");
+    if (ptr_in_list(p->meta, ptr) != NULL)
+    {
+        printf("IN META");
+    }
 }

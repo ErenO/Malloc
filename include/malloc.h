@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:10:28 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/08 14:26:43 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 00:53:48 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void show_alloc_mem();
 void free(void *ptr);
 void *malloc(size_t size);
 void *realloc(void *ptr, size_t size);
+void *ptr_in_list(t_metadata *list, void *addr);
 
 #endif
