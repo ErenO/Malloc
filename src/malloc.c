@@ -6,13 +6,13 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:24 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 16:39:29 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 23:30:31 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void print_list()
+void print_list_elem(void *str)
 {
     t_metadata *tmp;
     t_metadata *tlp;
@@ -21,9 +21,12 @@ void print_list()
     tlp = p->large;
     if (tmp != NULL)
     {
-        while (tmp->next != NULL)
+        while (tmp != NULL)
         {
-            printf("free %d\naddr %p\nsize %zu\n", tmp->free, tmp->ptr, tmp->size);
+            if (tmp->ptr == str)
+            {
+                printf("free %d\naddr %p\nsize %zu\n", tmp->free, tmp->ptr - tmp->size, tmp->size);
+            }
             tmp = tmp->next;
         }
     }
@@ -31,7 +34,38 @@ void print_list()
     {
         while (tlp->next != NULL)
         {
+            if (tlp->ptr == str)
+            {
+                printf("free %d\naddr %p\nsize %zu\n", tlp->free, tlp->ptr - tlp->size, tlp->size);
+            }
+            tmp = tmp->next;
             printf("free %d\naddr %p\nsize %zu\n", tlp->free, tlp->ptr, tlp->size);
+            tlp = tlp->next;
+        }
+    }
+}
+
+void print_list()
+{
+    t_metadata *tmp;
+    t_metadata *tlp;
+
+    tmp = p->meta;
+    tlp = p->large;
+    printf("\nPRINT LIST\n");
+    if (tmp != NULL)
+    {
+        while (tmp != NULL)
+        {
+            printf("free %d\naddr %p\nsize %zu\n", tmp->free, tmp->ptr - tmp->size, tmp->size);
+            tmp = tmp->next;
+        }
+    }
+    if (tlp != NULL)
+    {
+        while (tlp->next != NULL)
+        {
+            printf("free %d\naddr %p\nsize %zu\n", tlp->free, tlp->ptr - tlp->size, tlp->size);
             tlp = tlp->next;
         }
     }
@@ -82,8 +116,9 @@ t_metadata *meta_insert(t_metadata *meta, size_t size)
   //check d'erreur à faire
   if (p->size == 0)
   {
+      printf("DEDANS\n");
     ptr = mmap(0, getpagesize(), PROT_READ | PROT_WRITE,
-                MAP_ANON | MAP_PRIVATE, -1, 0) + 100;
+                MAP_ANON | MAP_PRIVATE, -1, 0);
     new_page = 1;
   }
   else
@@ -194,7 +229,7 @@ void *last_add(t_metadata *meta)
 
 void *malloc(size_t size)
 {
-    printf("BIENVENUE");
+    printf("BIENVENUE\n");
     if (p == NULL)
     {
     p =  mmap(0, sizeof(t_p), PROT_READ | PROT_WRITE,

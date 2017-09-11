@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:10:19 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 17:52:23 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 22:06:20 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main()
   printf("s1 %s\n", s);
   if ((str = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
-    printf("hello");
+    // printf("hello");
     return (0);
   }
   i = 0;
@@ -51,7 +51,7 @@ int main()
   char *str1;
   if ((str1 = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
-    printf("hello");
+    // printf("hello");
     return (0);
   }
   i = 0;
@@ -61,7 +61,7 @@ int main()
     i++;
   }
   str1[i] = '\0';
-  printf("str1 %s\ns %s\n", str1, s);
+  // printf("str1 %s\ns %s\n", str1, s);
   char *str2;
   if ((str2 = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
@@ -75,7 +75,7 @@ int main()
     i++;
   }
   str2[i] = '\0';
-  printf("str2 %s\ns %s\n", str2, s);
+  // printf("str2 %s\ns %s\n", str2, s);
   char *sstr3;
   if ((sstr3 = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
@@ -89,7 +89,7 @@ int main()
     i++;
   }
   sstr3[i] = '\0';
-  printf("sstr3 %s\ns %s\n", sstr3, s);
+  // printf("sstr3 %s\ns %s\n", sstr3, s);
   char *str4;
   if ((str4 = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
@@ -103,7 +103,7 @@ int main()
     i++;
   }
   str4[i] = '\0';
-  printf("str4 %s\ns %s\n", str4, s);
+  // printf("str4 %s\ns %s\n", str4, s);
   char *str5;
   if ((str5 = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
@@ -117,7 +117,7 @@ int main()
     i++;
   }
   str5[i] = '\0';
-  printf("str5 %s\ns %s\n", str5, s);
+  // printf("str5 %s\ns %s\n", str5, s);
   char *str6;
   if ((str6 = (char *)malloc(sizeof(char) * nb + 1)) == NULL)
   {
@@ -131,7 +131,7 @@ int main()
     i++;
   }
   str6[i] = '\0';
-  printf("str6 %s\ns %s\n", str6, s);
+  // printf("str6 %s\ns %s\n", str6, s);
   // while (i < 200)
   // {
   //     s = malloc(nb);
@@ -144,12 +144,16 @@ int main()
   printf("lsit %p\n", p->meta->ptr);
   printf("AVANT\n");
   s = realloc(s, 60);
-  print_list();
+  str = realloc(str, 60);
+  // print_list();
+  print_list_elem(str);
   printf("\n\n\n\n");
   free(s);
-  free(str1);
+  free(str);
+  // print_list_elem(s);
   print_list();
-  print_list();
+
+  // print_list();
   //
   // free(s);
   // free(str);

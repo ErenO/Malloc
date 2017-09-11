@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:37:35 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 17:26:37 by eozdek           ###   ########.fr       */
+/*   Updated: 2017/09/11 23:26:15 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void    *realloc(void *ptr, size_t size)
     void *to_free;
     void *addr;
 
+    addr = NULL;
+    printf("ptr reac %p\n", ptr);
     if ((to_free = ptr_in_list(p->meta, ptr)))
     {
         // free(to_free);
