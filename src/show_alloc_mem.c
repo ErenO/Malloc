@@ -6,13 +6,15 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 16:36:10 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/11 01:09:25 by eren_ozdek       ###   ########.fr       */
+/*   Updated: 2017/09/11 13:47:45 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-
+void print_list()
+{
+}
 
 void  show_alloc_mem()
 {

@@ -6,7 +6,7 @@
 /*   By: eozdek <eozdek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 16:36:24 by eozdek            #+#    #+#             */
-/*   Updated: 2017/09/09 00:16:52 by eren_ozdek       ###   ########.fr       */
+/*   Updated: 2017/09/11 15:04:30 by eren_ozdek       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,29 @@ int check_enough_space_memory(size_t size)
   if (size + i >= 4096)
   {
     p->size += ((4096 - i) + size);
-    printf("size %zu, i %d\n", size, p->size);
+    // printf("size %zu, i %d\n", size, p->size);
     return (1);
   }
   else
   {
     return (0);
   }
+}
+
+void *last_ptr(t_metadata *meta)
+{
+    if (meta == NULL)
+        return (NULL);
+    int i;
+
+    i = 0;
+    while (meta->next != NULL)
+    {
+        meta = meta->next;
+        i++;
+    }
+    // printf("i %d\n", i);
+    return (meta->ptr);
 }
 
 t_metadata *meta_insert(t_metadata *meta, size_t size)
@@ -36,12 +52,13 @@ t_metadata *meta_insert(t_metadata *meta, size_t size)
   void *ptr;
   int new_page;
 
+  // printf("META INSERT\n");
   new_page = 0;
   //check d'erreur à faire
   if (p->size == 0)
   {
     ptr = mmap(0, getpagesize(), PROT_READ | PROT_WRITE,
-                MAP_ANON | MAP_PRIVATE, -1, 0);
+                MAP_ANON | MAP_PRIVATE, -1, 0) + 100;
     new_page = 1;
   }
   else
@@ -51,6 +68,7 @@ t_metadata *meta_insert(t_metadata *meta, size_t size)
       ptr = mmap(0, getpagesize(), PROT_READ | PROT_WRITE,
                   MAP_ANON | MAP_PRIVATE, -1, 0);
       new_page = 1;
+      printf("new\n");
     }
   }
   tmp = mmap(0, sizeof(t_metadata), PROT_READ | PROT_WRITE,
@@ -67,14 +85,18 @@ t_metadata *meta_insert(t_metadata *meta, size_t size)
   }
   else
   {
-    // printf("size %zu\n", tmp->size);
     if (new_page == 1)
     {
-      tmp->ptr = ptr + size;
-      printf("nouvelle page %d\n", p->size);
+        // printf("last_ptr %p\n", last_ptr(tmp2));
+        tmp->ptr = last_ptr(tmp2) + size;
+        printf("nouvelle page %d\n", p->size);
     }
     else
-      tmp->ptr = tmp2->ptr + size;
+    {
+        // printf("last_ptr %p\n", last_ptr(tmp2));
+        tmp->ptr = last_ptr(tmp2) + size;
+        // printf("else %p\n", tmp->ptr);
+    }
     while (tmp2->next != NULL)
       tmp2 = tmp2->next;
     tmp2->next = tmp;
@@ -108,11 +130,11 @@ t_metadata *large_insert(t_metadata *large, size_t size)
     }
     else
     {
-    tmp->ptr = tmp2->ptr;
-    while (tmp2->next != NULL)
-      tmp2 = tmp2->next;
-    tmp2->next = tmp;
-    tmp->prev = tmp2;
+        tmp->ptr = tmp2->ptr;
+        while (tmp2->next != NULL)
+          tmp2 = tmp2->next;
+        tmp2->next = tmp;
+        tmp->prev = tmp2;
     }
     return (large);
 }
@@ -141,7 +163,7 @@ void *last_add(t_metadata *meta)
 {
   while (meta->next != NULL)
     meta = meta->next;
-  printf("%p\n", meta->ptr);
+  printf("l'addresse de retour %p\n", meta->ptr);
   return (meta->ptr - meta->size);
 }
 
@@ -156,24 +178,24 @@ void *malloc(size_t size)
   // printf("taille %zu\n", size);
   if (size < TINY)
   {
-    p->size += TINY;
-    printf("TINY\n");
+    // printf("TINY\n");
     p->meta = meta_insert(p->meta, TINY);
+    p->size += TINY;
     return (last_add(p->meta));
   }
   else if (size < SMALL)
   {
-    p->size += SMALL;
-    printf("SMALL\n");
+    // printf("SMALL\n");
     p->meta = meta_insert(p->meta, SMALL);
+    p->size += SMALL;
     return (last_add(p->meta));
   }
   else
   {
-    printf("LARGE\n");
+    // printf("LARGE\n");
     p->large = large_insert(p->large, size);
     return (last_add(p->large));
   }
-  printf("NULL\n");
+  // printf("NULL\n");
   return (NULL);
 }
